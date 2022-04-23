@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 50px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        input {
+            width: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="0">
+    <script>
+        window.onload = function () {
+            var oInput = document.getElementsByTagName('input')[0]
+            function sum() {
+                var sum = parseInt(oInput.value)
+                var i = 1
+                return (sum += i)
+            }
+            oInput.onclick = function () {
+                alert(sum())
+                this.value = sum()
+            }
+        }
+    </script>
+</body>
+
+</html>

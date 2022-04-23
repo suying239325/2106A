@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #outer {
+            text-align: center;
+        }
+
+        #f-text {
+            width: 50px;
+            margin: 0 10px;
+            background: #3dc1ad;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <input type="text" id="f-text">
+        <input type="button" value="是否是两位数">
+    </div>
+    <script>
+        window.onload = function () {
+            var oInput = document.getElementsByTagName('input');
+            for (var i = 0; i < oInput.length; i++) {
+                oInput[0].onkeyup = function () {
+                    this.value = this.value.replace(/[^\d]/, "")
+                }
+                oInput[1].onclick = function () {
+                    var oF = oInput[0].value
+                    var n = oF.length;
+                    alert(n == 2 ? "\u2713是两位数" : "这是" + n + "位数");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

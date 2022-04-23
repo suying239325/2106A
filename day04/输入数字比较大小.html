@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #outer {
+            text-align: center;
+        }
+
+        .f-text {
+            width: 50px;
+            margin: 0 5px;
+        }
+
+        strong,
+        span {
+            padding: 0 5px;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <input type="text" class="f-text"><strong>vs</strong><input type="text" class="f-text"><input type="button"
+            value="最大的数是>>"><span>?</span>
+    </div>
+    <script>
+        window.onload = function () {
+            var oInput = document.getElementsByTagName('input');
+            var oSpan = document.getElementsByTagName('span')[0]
+            for (var i = 0; i < oInput.length - 1; i++) {
+                oInput[i].onkeyup = function () {
+                    this.value = this.value.replace(/[^\d]/, "")
+                }
+                function match() {
+                    var m = 0;
+                    m = parseInt(oInput[0].value) >= parseInt(oInput[1].value) ? parseInt(oInput[0].value) : parseInt(
+                        oInput[1].value)
+                    return m;
+                }
+                oInput[2].onclick = function () {
+                    oSpan.innerHTML = match()
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

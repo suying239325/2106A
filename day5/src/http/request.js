@@ -1,60 +1,63 @@
-/**
- * axios二次封装
- */
-
+//对aixos二次封装
 import Axios from 'axios'
-import encConfig from './env'
+//引入element ui的消息框
 import { Message } from 'element-ui'
+import router from '../router'
+//引入环境地址
+import env from './env'
+const {
+  baseURL
+} = env.prod
+//创建一个axios实例
+const axios = Axios.create({
+  baseURL,
+  timeout: 5000
+})
+//设置请求拦截器
+axios.interceptors.request.use(config => {
 
-//创建axios实例
-const service = Axios.create({
-    //设置基地址
-    baseURL: encConfig.prod.baseURL,
-    timeout: 5000
+  if (config.url !== '/login') {
+    const token = sessionStorage.getItem('token')
+    config.headers.Authorization = token
+  }
+  return config
+}, error => {
+  return Promise.reject(error)
+})
+//响应拦截器
+axios.interceptors.response.use(res => {
+  // console.log('响应拦截器：', res)
+  const {
+    data: result,
+    meta: {
+      msg,
+      status
+    }
+  } = res.data
+  const successArr = [200, 201, 204]
+
+  if (successArr.includes(status)) {
+    if (res.config.url === '/login') {
+      sessionStorage.setItem('token', result.token)
+    }
+    // Message({
+    //     message: msg,
+    //     type: 'success'
+    // })
+    return result
+  }
+
+  Message({
+    message: msg,
+    type: 'error'
+  })
+  if (msg === '无效token') {
+    return router.push('/')
+  }
+  return Promise.reject(msg)
+
+}, error => {
+  return Promise.reject(error)
 })
 
-//创建请求拦截器
-service.interceptors.request.use(
-    (config) => {
-        return config
-    },
-    (error) => {
-        return Promise.reject(error)
-    }
-)
-
-//创建响应拦截器
-service.interceptors.response.use(
-    (res) => {
-        console.log('res:::', res)
-        const {
-            meta: { msg, status: code },
-            data: result
-        } = res.data
-        const successCodeArr = [200, 201, 204]
-        if (successCodeArr.includes(code)) {
-            Message({
-                message: msg,
-                type: 'success'
-            })
-
-            if (res.config.url === '/login') {
-                sessionStorage.setItem('token', result.token)
-            }
-
-            return result
-        }
-
-        Message({
-            message: msg,
-            type: 'error'
-        })
-
-        return Promise.reject(msg)
-    },
-    (error) => {
-        return Promise.reject(error)
-    }
-)
-
-export default service
+export default axios;

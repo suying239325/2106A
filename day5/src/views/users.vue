@@ -163,10 +163,12 @@
 
 <script>
 import _ from "lodash";
-import { getUserListApi } from "@/http/api"; // 总数据
-import { getUserdelet } from "@/http/api"; // 单个删除
-import { getUseradd } from "@/http/api"; // 添加
-import { getbg } from "@/http/api"; // 编辑
+import { getUserListApi } from "@/http/api";
+import { getUserdelet } from "@/http/api";
+import { getUseradd } from "@/http/api";
+import { getbg } from "@/http/api";
+import { getstate } from "@/http/api";
+import { getrid, jsqd } from "@/http/api";
 
 export default {
   data() {
@@ -258,14 +260,12 @@ export default {
   },
   mounted() {},
   created() {
-    //   调用总数据的接口
     this.getUserList();
   },
   methods: {
-    // 搜索
-    search() {
+    search: _.debounce(function () {
       this.getUserList();
-    },
+    }, 2000),
 
     remove(id) {
       //删除
@@ -311,8 +311,29 @@ export default {
         this.getUserList();
       });
     },
-
-    // 分页
+    role(row) {
+      //角色框
+      this.yhid = row.id;
+      this.roleData.username = row.username;
+      this.roleData.juese = row.role_name;
+      this.roles = true;
+      getrid().then((res) => {
+        //  console.log(res);
+        this.values = res;
+      });
+      // this.roleData=row
+      // this.rol=res
+      // this.roles=true
+    },
+    jsqds() {
+      //角色框确定
+      console.log(this.yhid);
+      console.log(this.jsid);
+      jsqd(this.yhid, this.jsid).then((res) => {
+        this.getUserList();
+      });
+      this.roles = false;
+    },
     handleSizeChange(val) {
       this.userinfo.pagesize = val;
       this.getUserList();

@@ -9,46 +9,47 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside :width="isc ? '60px' : '200px'">
-          <div @click="isc = !isc">|||</div>
+        <el-aside  :width="isc ? '60px' : '200px'">
+          <div @click="isc=!isc">|||</div>
           <!-- <el-row class="tac"> -->
-          <el-col>
-            <el-menu
-              :default-active="$route.path"
-              class="el-menu-vertical-demo"
-              background-color="#545c64"
-              text-color="#fff"
-              active-text-color="#ffd04b"
-              unique-opened
-              :collapse="isc"
-              :collapse-transition="false"
-              router
-            >
-              <el-submenu
-                :index="item1.id + ''"
-                v-for="item1 in list"
-                :key="item1.id"
+            <el-col>
+              <el-menu
+                :default-active="$route.path"
+                class="el-menu-vertical-demo"
+                background-color="#545c64"
+                text-color="#fff"
+                active-text-color="#ffd04b"
+                unique-opened
+                :collapse="isc"
+                :collapse-transition='false'
+                router
               >
-                <template slot="title">
-                  <i class="el-icon-s-custom"></i>
-                  <span>{{ item1.authName }}</span>
-                </template>
+              <el-submenu
+              :index="item1.id + ''"
+              v-for="item1 in list"
+              :key="item1.id"
+            >
+              <template slot="title">
+                <i class="el-icon-s-custom"></i>
+                <span>{{ item1.authName }}</span>
+              </template>
 
-                <el-menu-item
-                  :index="'/' + item2.path"
-                  v-for="item2 in item1.children"
-                  :key="item2.id"
-                >
-                  <i class="el-icon-setting"></i>
-                  <span slot="title">{{ item2.authName }}</span>
-                </el-menu-item>
-              </el-submenu>
-            </el-menu>
-          </el-col>
+              <el-menu-item
+                :index="'/' + item2.path"
+                v-for="item2 in item1.children"
+                :key="item2.id"
+              >
+                <i class="el-icon-setting"></i>
+                <span slot="title">{{ item2.authName }}</span>
+              </el-menu-item>
+            </el-submenu>
+              </el-menu>
+            </el-col>
           <!-- </el-row> -->
         </el-aside>
         <el-main>
-          <router-view> </router-view>
+          <router-view>
+          </router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -61,9 +62,10 @@ export default {
   data() {
     return {
       list: [],
-      isc: false,
+      isc:false
     };
   },
+  mounted() {},
   created() {
     this.getMenus();
   },
@@ -74,26 +76,26 @@ export default {
       this.list = res;
     },
     open() {
-      sessionStorage.removeItem("token");
+      sessionStorage.removeItem('token')
       this.$router.push("/");
-    },
+    }
   },
   components: {},
 };
 </script>
 
-<style lang="scss" scoped>
-.loginbox {
+<style lang='scss' scoped>
+.loginbox{
   width: 100%;
   height: 100%;
 }
-.isc {
+.isc{
   text-align: center;
 }
 .el-header,
 .el-footer {
   background-color: #545c64;
-  color: white;
+  color:white;
   font-weight: bold;
   text-align: center;
   line-height: 60px;
@@ -105,7 +107,7 @@ export default {
   text-align: center;
   // height: 100vh;
 }
-.el-container {
+.el-container{
   height: 100%;
 }
 .el-main {
@@ -118,7 +120,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.el-menu {
+.el-menu{
   border: none;
 }
 </style>

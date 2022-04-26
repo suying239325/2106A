@@ -4,39 +4,54 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    redirect: '/hy',
-    component: () => import('../views/About.vue'),
-    children: [
-      {
-        path: '/hy',
-        name: "hy",
-        component: () => import('../views/hy.vue')
-      },
-      {
-        path: '/categories',
-        name: "categories",
-        component: () => import('../views/categories.vue')
-      },
-      {
-        path: '/users',
-        name: "users",
-        component: () => import('../views/users.vue')
-      }
-    ]
-  }
+const routes = [{
+	path: '/',
+	name: 'Home',
+	component: Home
+},
+{
+	path: '/',
+	name: 'About',
+	redirect: '/hy',
+	component: () => import('../views/About.vue'),
+	children: [{
+		path: '/users',
+		name: 'users',
+		component: () => import('../views/users.vue'),
+	}, {
+		path: '/hy',
+		name: 'hy',
+		component: () => import('../views/hy.vue'),
+	}, {
+		path: '/roles',
+		name: 'roles',
+		component: () => import('../views/roles.vue')
+	}, {
+		path: "/rights",
+		name: "rights",
+		component: () => import('../views/rights.vue')
+	}]
+}
 ]
-
 const router = new VueRouter({
-  routes
+	routes
+})
+
+router.beforeEach((to, from, next) => {
+	let status = sessionStorage.getItem('token')
+	if (status) {
+		if (to.path == '/') {
+			next('/hy')
+		} else {
+			next()
+		}
+	} else {
+		if (to.path == '/') {
+			next()
+		} else {
+			next('/')
+		}
+	}
 })
 
 export default router

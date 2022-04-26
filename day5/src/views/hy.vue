@@ -1,5 +1,7 @@
 <template>
-  <div class="hy"><h1>欢迎您来到电商后台</h1></div>
+    <div class='shouye'>
+        <h1>Welcome To 首页</h1>
+    </div>
 </template>
 
 <script>
@@ -8,9 +10,15 @@ export default {
     return {};
   },
   mounted() {},
+  created() {},
   methods: {},
-  components: {},
+  components: {}
 };
 </script>
 
-<style lang="scss"></style>
+<style lang='scss' scoped>
+.shouye{
+  width: 100%;
+  height: 100%;
+}
+</style>

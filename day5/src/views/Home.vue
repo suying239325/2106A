@@ -49,19 +49,18 @@ export default {
       },
     };
   },
-
-  mounted() {},
-  created() {},
   methods: {
+    // 登录
     add() {
       this.$refs.ruleForm.validate(async (valid) => {
         console.log(valid);
         if (!valid) return;
         const res = await LoginApi(this.ruleForm);
         console.log("登陆成功：", res);
-        this.$router.push("/about");
+        this.$router.push("/hy");
       });
     },
+    // 重置
     reset() {
       this.$refs.ruleForm.resetFields();
     },
@@ -71,10 +70,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-html,
-body {
-  background-color: #227677;
-}
 .box {
   width: 100%;
   height: 100%;

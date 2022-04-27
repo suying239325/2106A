@@ -142,7 +142,7 @@
         当前的用户：<span>{{ roleData.username }}</span>
       </div>
       <div>
-        当前的角色：<span>{{ roleData.juese }}</span>
+        当前的角色：<span>{{ roleData.role_name }}</span>
       </div>
       <el-select v-model="jsid" placeholder="请选择">
         <el-option
@@ -173,8 +173,8 @@ import { getrid, jsqd } from "@/http/api";
 export default {
   data() {
     let checkEmail = (rule, value, callback) => {
-      console.log("rule:", rule);
-      console.log("value:", value);
+      // console.log("rule:", rule);
+      // console.log("value:", value);
       //邮箱正则
       const reg =
         /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -258,7 +258,6 @@ export default {
       },
     };
   },
-  mounted() {},
   created() {
     this.getUserList();
   },
@@ -269,9 +268,26 @@ export default {
 
     remove(id) {
       //删除
-      getUserdelet(id).then((res) => {
-        this.getUserList();
-      });
+      this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          getUserdelet(id).then((res) => {
+            this.getUserList();
+          });
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
     },
     add() {
       //添加模态框
@@ -313,26 +329,22 @@ export default {
     },
     role(row) {
       //角色框
+      console.log(row);
       this.yhid = row.id;
       this.roleData.username = row.username;
-      this.roleData.juese = row.role_name;
+      this.roleData.role_name = row.role_name;
       this.roles = true;
       getrid().then((res) => {
-        //  console.log(res);
         this.values = res;
       });
-      // this.roleData=row
-      // this.rol=res
-      // this.roles=true
     },
+    //  确定
     jsqds() {
-      //角色框确定
-      console.log(this.yhid);
-      console.log(this.jsid);
+      this.roles = false;
       jsqd(this.yhid, this.jsid).then((res) => {
+        console.log(res);
         this.getUserList();
       });
-      this.roles = false;
     },
     handleSizeChange(val) {
       this.userinfo.pagesize = val;

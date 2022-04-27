@@ -43,7 +43,7 @@ export function getbg(data) { //编辑
         data
     })
 }
-
+// 改变用户的状态
 export function getstate(data) {
     return request({
         url: '/users/' + data.uid + '/state/' + data.type,
@@ -60,7 +60,7 @@ export function getrid() {
 }
 
 
-
+// 分配角色
 export function jsqd(id, rid) {
     return request({
         url: `users/${id}/role`,
@@ -110,5 +110,30 @@ export function getRights(type = 'list') {
     return request({
         url: `/rights/${type}`,
         method: "GET"
+    })
+}
+
+// 角色授权接口
+export function setReightRole(roleId, rids) {
+    return request({
+        url: `roles/${roleId}/rights`,
+        method: "POST",
+        data: { rids }
+    })
+}
+
+// 删除权限的id
+export function deleRole(roleId, rightId) {
+    return request({
+        url: `roles/${roleId}/rights/${rightId}`,
+        method: "DELETE"
+    })
+}
+
+// 商品列表数据
+export function getGoods(params) {
+    return request({
+        url: '/goods',
+        params
     })
 }

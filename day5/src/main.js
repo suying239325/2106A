@@ -45,7 +45,7 @@ Vue.filter('paymentItem', function (n) {
     case 0:
       result = '未付款';
       break;
-      case 1:
+    case 1:
       result = '已付款';
       break;
     // default:
@@ -54,14 +54,14 @@ Vue.filter('paymentItem', function (n) {
   return result
 })
 //过滤订单下单时间
-Vue.filter('time',function(val){
-  var time=new Date(val*1000)
-  var yaer=time.getFullYear()
-  var moth=time.getMonth()+1
-  var day=time.getUTCDay()
-  var hours=time.getUTCHours()
-  var minus=time.getUTCMinutes()
-  var seconds=time.getUTCSeconds()
+Vue.filter('time', function (val) {
+  var time = new Date(val * 1000)
+  var yaer = time.getFullYear()
+  var moth = time.getMonth() + 1
+  var day = time.getUTCDay()
+  var hours = time.getUTCHours()
+  var minus = time.getUTCMinutes()
+  var seconds = time.getUTCSeconds()
   return `${yaer}年${moth}月${day}日  ${hours}:${minus}:${seconds}`
 })
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        input {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            border: 1px solid #0ff;
+            font: 15px;
+            width: 400px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        #box p {
+            color: #0ff;
+            border-bottom: 1px solid #0ff;
+            text-align: left;
+            padding: 2px 10px;
+        }
+
+        #down span {
+            display: inline-block;
+            text-align: right;
+            width: 80px;
+        }
+
+        #btn {
+            width: 100px;
+            height: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            color: #fff;
+            background-color: #0ff;
+        }
+
+        #down .focus {
+            background-color: #0ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <p>登录</p>
+        <div id="down">
+            <span>用户名</span>
+            <input type="text"><br>
+            <span>密码</span>
+            <input type="text"><br>
+            <button>登录</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var oInput = document.getElementsByTagName('input')
+        for (var i = 0; i < oInput.length - 1; i++) {
+            oInput[i].onfocus = function () {
+                this.className = "focus"
+            }
+            oInput[i].onblur = function () {
+                this.className = ""
+            }
+        }
+    }
+</script>

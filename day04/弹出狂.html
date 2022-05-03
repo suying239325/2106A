@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #win {
+            width: 500px;
+            height: 500px;
+            background-color: hotpink;
+            margin: auto;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <div id="win">
+        <h2><span id="close">x</span></h2>
+    </div>
+    <center><button>弹出层</button></center>
+    <script>
+        window.onload = function () {
+            var lay = document.getElementById('overlay')
+            var win = document.getElementById('win')
+            var close = document.getElementById('close')
+            var btn = document.getElementsByTagName('button')[0]
+            btn.onclick = function () {
+                // console.log(1);
+                win.style.display = "block"
+                lay.style.display = "block"
+            }
+            close.onclick = function () {
+                win.style.display = "none"
+                lay.style.display = "none"
+            }
+        }
+    </script>
+</body>
+
+</html>

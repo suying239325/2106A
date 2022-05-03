@@ -15,25 +15,37 @@ const routes = [{
 	redirect: '/hy',
 	component: () => import('../views/About.vue'),
 	children: [{
-		path: '/users',
-		name: 'users',
-		component: () => import('../views/users.vue'),
-	}, {
 		path: '/hy',
 		name: 'hy',
 		component: () => import('../views/hy.vue'),
 	}, {
-		path: '/roles',
-		name: 'roles',
+		path: '/users',
+		name: 'users',
+		component: () => import('../views/users.vue')
+	}, {
+		path: "/roles",
+		name: "roles",
 		component: () => import('../views/roles.vue')
 	}, {
-		path: "/rights",
-		name: "rights",
+		path: '/rights',
+		name: 'rights',
 		component: () => import('../views/rights.vue')
 	}, {
 		path: '/goods',
-		name: 'goods',
+		name: "goods",
 		component: () => import('../views/goods.vue')
+	}, {
+		path: '/addGoods',
+		name: "addGoods",
+		component: () => import('../views/addGoods.vue')
+	}, {
+		path: '/categories',
+		name: "categories",
+		component: () => import('../views/categories.vue')
+	}, {
+		path: '/params',
+		name: "params",
+		component: () => import('../views/params.vue')
 	}]
 }
 ]

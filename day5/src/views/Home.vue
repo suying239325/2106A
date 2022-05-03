@@ -36,21 +36,41 @@ import { LoginApi } from "@/http/api";
 export default {
   data() {
     return {
-      ruleForm: { username: "admin", password: "123456" },
+      ruleForm: {
+        username: "admin",
+        password: "123456",
+      },
       rules: {
         username: [
-          { required: true, message: "请输入账号名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入账号名称",
+            trigger: "blur",
+          },
+          {
+            min: 3,
+            max: 5,
+            message: "长度在 3 到 5 个字符",
+            trigger: "blur",
+          },
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 4, max: 7, message: "长度在 4 到 7 个字符", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur",
+          },
+          {
+            min: 4,
+            max: 7,
+            message: "长度在 4 到 7 个字符",
+            trigger: "blur",
+          },
         ],
       },
     };
   },
   methods: {
-    // 登录
     add() {
       this.$refs.ruleForm.validate(async (valid) => {
         console.log(valid);
@@ -60,7 +80,7 @@ export default {
         this.$router.push("/hy");
       });
     },
-    // 重置
+    // 表单的重置
     reset() {
       this.$refs.ruleForm.resetFields();
     },
@@ -74,6 +94,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .nav {
   width: 500px;
   height: 400px;
@@ -85,17 +106,21 @@ export default {
   right: 0;
   margin: auto;
   border-radius: 6px;
+
   h2 {
     text-align: center;
     margin: 40px;
   }
 }
+
 .footer {
   width: 100%;
+
   div {
     margin-left: 330px;
   }
 }
+
 .el-form {
   width: 300px;
   margin: 0 auto;

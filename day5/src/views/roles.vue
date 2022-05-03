@@ -1,302 +1,198 @@
 <template>
   <div class="roles">
-    <el-row :gutter="12">
-      <el-col :span="8">
-        <el-card shadow="always">
-          <el-button type="primary" @click="addRole">添加角色</el-button>
-          <el-table :data="tableData" border style="width: 100%">
-            <el-table-column width="80" type="expand">
-              <template slot-scope="scope">
-                <div>
-                  <div v-if="scope.row.children.length > 0">
-                    <el-row v-for="item in scope.row.children" :key="item.id">
-                      <el-col :span="6">
-                        <el-tag closable>{{ item.authName }}</el-tag>
-                      </el-col>
-                      <el-col :span="18">
-                        <el-row v-for="item2 in item.children" :key="item2.id">
-                          <el-col :span="6">
-                            <el-tag type="success" closable>{{
-                              item2.authName
-                            }}</el-tag>
-                          </el-col>
-                          <el-col :span="18">
-                            <el-tag
-                              v-for="item3 in item2.children"
-                              :key="item3.id"
-                              type="warning"
-                              closable
-                              @close="dele(scope.row.id, item3.id)"
-                              >{{ item3.authName }}</el-tag
-                            >
-                          </el-col>
-                        </el-row>
-                      </el-col>
-                    </el-row>
-                  </div>
-                  <div v-else>暂无数据</div>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column prop="id" label="#" width="100"></el-table-column>
-            <el-table-column prop="roleName" label="角色名称" width="350">
-            </el-table-column>
-            <el-table-column prop="roleDesc" label="角色描述"></el-table-column>
-            <el-table-column label="操作">
-              <template slot-scope="scope">
-                <div>
-                  <el-button
-                    type="primary"
-                    icon="el-icon-edit"
-                    circle
-                    size="mini"
-                    @click="edit(scope.row)"
-                  ></el-button>
-                  <el-button
-                    type="danger"
-                    icon="el-icon-delete"
-                    circle
-                    size="mini"
-                    @click="dele(scope.row.id)"
-                  ></el-button>
-                  <el-button
-                    type="warning"
-                    circle
-                    icon="el-icon-setting"
-                    size="mini"
-                    @click="edRoles(scope.row)"
-                  ></el-button>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card>
-      </el-col>
-    </el-row>
+    <el-card class="box-card">
+      <el-button type="primary" @click="addRoles">添加角色</el-button>
+      <el-table :data="tableData" border style="width: 100%">
+        <el-table-column label="" width="60"> </el-table-column>
+        <el-table-column label="#" width="180" type="index"> </el-table-column>
+        <el-table-column prop="roleName" label="角色列表" width="120">
+        </el-table-column>
+        <el-table-column prop="roleDesc" label="角色描述"> </el-table-column>
+        <el-table-column label="操作" width="180">
+          <template slot-scope="scope">
+            <div>
+              <el-button
+                size="mini"
+                type="primary"
+                icon="el-icon-edit"
+                @click="editRole(scope.row)"
+              >
+              </el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                icon="el-icon-delete"
+                @click="dele(scope.row.id)"
+              >
+              </el-button>
+              <el-button
+                size="mini"
+                type="warning"
+                icon="el-icon-setting"
+                @click="role(scope.row)"
+              >
+              </el-button>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
     <!-- 添加角色的模态框 -->
-    <el-dialog title="添加角色" :visible.sync="dialogVisible" width="45%">
-      <el-form
-        :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="角色名称" prop="roleName">
-          <el-input v-model="ruleForm.roleName"></el-input>
+    <el-dialog title="添加用户" :visible.sync="dialogVisible" width="45%">
+      <el-form ref="roles" :model="roles" label-width="80px">
+        <el-form-item label="角色名称">
+          <el-input v-model="roles.roleName"></el-input>
         </el-form-item>
-        <el-form-item label="角色描述" prop="roleDesc">
-          <el-input v-model="ruleForm.roleDesc"></el-input>
+        <el-form-item label="角色描述">
+          <el-input v-model="roles.roleDesc"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addRoleOk">确 定</el-button>
+        <el-button type="primary" @click="rolesOk">确 定</el-button>
       </span>
     </el-dialog>
-    <!-- 分配权限的模态框 -->
-
-    <el-dialog
-      title="提示"
-      :visible.sync="isRoleDialog"
-      width="45%"
-      :before-close="handleClose"
-    >
+    <!-- 编辑 -->
+    <el-dialog title="编辑用户" :visible.sync="dialog" width="45%">
+      <el-form ref="editRoles" :model="editRoles" label-width="80px">
+        <el-form-item label="角色名称">
+          <el-input v-model="editRoles.roleName"></el-input>
+        </el-form-item>
+        <el-form-item label="角色描述">
+          <el-input v-model="editRoles.roleDesc"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editRoleOk">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 分配权限 -->
+    <el-dialog title="分配权限" :visible.sync="roleS" width="60%">
       <el-tree
-        ref="treeRef"
-        :data="treeData"
+        :data="data"
         show-checkbox
         node-key="id"
+        ref="tree"
         default-expand-all
-        :default-checked-keys="checkArr"
+        :default-checked-keys="array"
         :props="defaultProps"
       >
       </el-tree>
+
       <span slot="footer" class="dialog-footer">
-        <el-button @click="isRoleDialog = false">取 消</el-button>
-        <el-button type="primary" @click="treeOks">确 定</el-button>
+        <el-button @click="roleS = false">取 消</el-button>
+        <el-button type="primary" @click="fpqd">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import {
-  getRoles,
-  Addroles,
-  deleRoles,
-  exitRole,
-  getTrees,
-  getRights,
-  setReightRole,
-  deleRole,
-} from "@/http/api";
+import { jueseList, addRole, deleRole, editRoeles, getsqjs } from "@/http/api";
 export default {
   data() {
     return {
-      // 表格信息
-      tableData: [],
-      // 添加角色模态框内容
-      dialogVisible: false,
-      ruleForm: {
-        roleName: "",
-        roleDesc: "",
-      },
-      rules: {
-        // 角色名称
-        roleName: [
-          { required: true, message: "请输入角色名称", tigger: "blur" },
-          {
-            min: 4,
-            max: 10,
-            required: true,
-            message: "角色名称是4-10位之间",
-            tigger: "blur",
-          },
-        ],
-        // 角色描述
-        roleDesc: [
-          { required: true, message: "请输入角色描述", tigger: "blur" },
-          {
-            min: 4,
-            max: 10,
-            required: true,
-            message: "角色描述是4-10位之间",
-            tigger: "blur",
-          },
-        ],
-      },
-      // 修改
-      Isdialog: false,
-      rulForm: {
-        roleName: "",
-        roleDesc: "",
-      },
-      // 分配权限的模态框
-      isRoleDialog: false,
+      array: [],
+      data: {},
+      tree: [],
       defaultProps: {
-        label: "authName",
         children: "children",
+        label: "authName",
       },
-      treeData: [],
-      checkArr: [],
-      currentRoleid: 0,
+      roleS: false,
+      tableData: [],
+      // 角色列表
+      roles: {
+        roleName: "",
+        roleDesc: "",
+      },
+      // 角色模态框
+      dialogVisible: false,
+      // 编辑模态框
+      dialog: false,
+      editRoles: {
+        roleName: "",
+        roleDesc: "",
+      },
     };
   },
   created() {
-    this.getRolesList();
+    this.juese();
   },
   methods: {
-    // 角色列表信息
-    getRolesList() {
-      getRoles().then((res) => {
+    // 角色表格数据
+    juese() {
+      jueseList().then((res) => {
         // console.log(res);
         this.tableData = res;
       });
     },
-    // 添加角色弹框出现
-    addRole() {
+    // 添加角色
+    addRoles() {
       this.dialogVisible = true;
     },
-    //  添加角色到角色列表里
-    addRoleOk() {
-      Addroles(this.ruleForm).then((res) => {
-        this.getRolesList();
-        this.dialogVisible = false;
+    // 角色确定
+    rolesOk() {
+      addRole(this.roles).then((res) => {
+        // console.log(res);
+        this.juese();
       });
+      this.dialogVisible = false;
     },
-    // 删除角色列表的数据
+    // 角色删除
     dele(id) {
-      this.$confirm("此操作将永久删除该用户角色, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          // console.log(id);
-          deleRoles(id).then((res) => {
-            // console.log(res);
-            this.getRolesList();
-          });
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
-    },
-    // 修改角色列表
-    editOk() {
-      //编辑确定
-      exitRole(this.rulForm).then((res) => {
-        // this.getRoles();
-        this.getRolesList();
+      // console.log(id);
+      deleRole(id).then((res) => {
+        this.juese();
       });
-      this.Isdialog = false;
     },
-    edit(row) {
-      //编辑模态框
-      this.Isdialog = true;
-      this.rulForm.id = row.id;
-      this.rulForm.roleName = row.roleName;
-    },
-    // 分配角色列表成功
-    edRoles(row) {
+    // 编辑
+    editRole(row) {
       console.log(row);
-      getRights("tree").then((res) => {
+      this.dialog = true;
+      this.editRoles.roleName = row.roleName;
+      this.editRoles.roleDesc = row.roleDesc;
+      this.editRoles.id = row.id;
+      editRoeles(this.editRoles).then((res) => {
         console.log(res);
-        this.treeData = res;
       });
-      this.currentRoleid = row.id;
-      this.getCheckedIdsArr(row, this.checkArr);
-      this.isRoleDialog = true;
     },
-    getCheckedIdsArr(row, checkArr) {
+    // 编辑确定
+    editRoleOk() {
+      editRoeles(this.editRoles).then((res) => {
+        console.log(res);
+        this.juese();
+      });
+      this.dialog = false;
+    },
+    // 分配权限确定
+    fpqd() {
+      let isArrayYes = [
+        ...this.$refs.tree.getCheckedKeys(),
+        ...this.$refs.tree.getHalfCheckedKeys(),
+      ];
+      // console.log(isArrayYes.join(','));
+      getsqjs(this.sqid, isArrayYes.join(",")).then((res) => {
+        this.getlist();
+      });
+      this.roleS = false;
+    },
+    // 分配权限
+    role(row) {
+      this.roleS = true;
+      console.log("row:", row);
+      this.sqid = row.id;
+      this.dg(row, this.array);
+    },
+    dg(row, arr) {
       if (!row.children) {
-        return checkArr.push(row.id);
-
-        row.children.forEach((item) => {
-          this.getCheckedIdsArr(item, checkArr);
-        });
+        return arr.push(row.id);
       }
-    },
-    // 模态框关闭的函数
-    handleClose() {
-      this.checkArr = [];
-    },
-    // 分配权限的关闭
-    treeOks() {
-      // 全选的id
-      const allChecked = this.$refs.treeRef.getCheckedKeys();
-      // console.log(allChecked);
-      // 半选得到id
-      const helfChecked = this.$refs.treeRef.getCheckedKeys();
-      // console.log(helfChecked);
-      // 将上面的数据进行合并
-      const mergCheckedArr = [...allChecked, ...helfChecked];
-      // console.log(mergCheckedArr);
-      // 将合并的数组转成字符串
-      const mergCheckedStr = mergCheckedArr.join(",");
-      // console.log(mergCheckedStr);
-      const res = setReightRole(this.currentRoleid, mergCheckedStr);
-    },
-    dele(roleId, rightId) {
-      deleRole(roleId, rightId).then((res) => {
-        console.log(res);
-        this.edRoles();
-      });
+      row.children.forEach((item) => this.dg(item, arr));
     },
   },
 };
 </script>
 
-<style lang="scss">
-.el-card {
-  width: 85vw;
-}
-</style>
+<style lang="scss"></style>

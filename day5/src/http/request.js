@@ -42,10 +42,10 @@ axios.interceptors.response.use(res => {
         if (res.config.url === '/login') {
             sessionStorage.setItem('token', result.token)
         }
-        Message({
-            message: msg,
-            type: 'success'
-        })
+        // Message({
+        //     message: msg,
+        //     type: 'success'
+        // })
         return result
     }
 

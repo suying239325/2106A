@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: #333;
+            font: 12px;
+            padding-top: 10px;
+        }
+
+        #outer {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-right: 5px;
+        }
+
+        label {
+            width: 5em;
+            display: inline-block;
+            text-align: right;
+        }
+
+        input {
+            padding: 3px;
+            font-family: inherit;
+            border: 1px solid #ccc;
+        }
+
+        #div1 {
+            color: #fff;
+            width: 180px;
+            height: 180px;
+            background-color: #000;
+            margin: 0 auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <p>
+            <label>属性名：</label>
+            <input type="text" value="background">
+        </p>
+        <p>
+            <label>属性值：</label>
+            <input type="text" value="blue">
+        </p>
+        <p>
+            <label></label>
+            <button>确定</button>
+            <button>重置</button>
+        </p>
+    </div>
+    <div id="div1">
+        在上方输入'属性名'以及'属性值'，点击确定按钮查看效果
+    </div>
+</body>
+
+</html>
+<script>
+    var changestyle = function (elem, name, value) {
+        elem.style[name] = value
+    }
+    window.onload = function () {
+        var div = document.getElementById('div1')
+        var btn = document.getElementsByTagName('button')
+        var input = document.getElementsByTagName('input')
+        btn[0].onclick = function () {
+            changestyle(div, input[0].value, input[1].value)
+        }
+        btn[1].onclick = function () {
+            div.removeAttribute('style')
+        }
+    }
+</script>

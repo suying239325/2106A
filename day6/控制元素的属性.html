@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 300px;
+            margin: auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        #div2 {
+            background-color: black;
+            width: 300px;
+            height: 300px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <button onclick="changeWidth()">变宽</button>
+        <button onclick="changeHeight()">变高</button>
+        <button onclick="changeColor()">变色</button>
+        <button onclick="changeHide()">隐藏</button>
+        <button onclick="changeRest()">重置</button>
+        <div id="div2"></div>
+    </div>
+    <script>
+        var c_b = document.getElementById('div2');
+        function changeWidth() {
+            c_b.style.width = "400px"
+        }
+        function changeHeight() {
+            c_b.style.height = "500px"
+        }
+        function changeColor() {
+            c_b.style.color = "red"
+        }
+        function changeHide() {
+            c_b.style.visibility = "hidden"
+        }
+        function changeRest() {
+            c_b.style.cssText = "width:300px;height:300px;background-color:black"
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font: 12px;
+        }
+
+        #outer {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        #outer div {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-indent: 2em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div>
+            <strong>自愈</strong>
+            态度决定一切，细节决定成败，习惯成就人生！
+            要么瘦，要么死！！！
+            肥猪，再胖下午你就真的没有人要了
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var div = document.getElementById('outer').getElementsByTagName('div')
+        for (var i = 0; i < div.length; i++) {
+            div[i].onclick = function () {
+                alert(this.innerHTML)
+            }
+        }
+    }
+</script>

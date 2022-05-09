@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        ul,
+        li,
+        a,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        li a {
+            text-decoration: none;
+        }
+
+        p {
+            display: none;
+        }
+
+        #outer {
+            width: 500px;
+            margin: 10px auto;
+        }
+
+        #month {
+            width: 400px;
+            margin: 0 auto;
+            background: #d6cdcd;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #month li {
+            width: 68px;
+            height: 68px;
+            border: 1px solid black;
+            margin: 10px 10px 0 0;
+            float: left;
+            padding: 10px;
+            font-size: 25px;
+            font-weight: 800;
+            color: white;
+            background: black;
+            cursor: pointer;
+        }
+
+        #month li span {
+            display: block;
+        }
+
+        #month li.liCurrent {
+            color: red;
+            background: white;
+        }
+
+        /* 下层盒子样式 */
+        #bottom {
+            width: 390px;
+            margin: 0 auto;
+            border: 10px solid #d6cdcd;
+            border-top: 0;
+            font-size: 25px;
+        }
+
+        #bottom p span {
+            font-weight: 800;
+        }
+
+        .pCurrent {
+            display: block;
+            border: 1px solid white;
+            background: #867676;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <ul id="month">
+            <li><span>1</span>JAN</li>
+            <li><span>2</span>FER</li>
+            <li><span>3</span>MAR</li>
+            <li><span>4</span>APR</li>
+            <li><span>5</span>MAY</li>
+            <li class="liCurrent"><span>6</span>JUN</li>
+            <li><span>7</span>JUL</li>
+            <li><span>8</span>AUG</li>
+            <li><span>9</span>SEP</li>
+            <li><span>10</span>OCT</li>
+            <li><span>11</span>NOV</li>
+            <li><span>12</span>DEC</li>
+        </ul>
+        <div id="bottom">
+            <p><span>1月节日</span>元旦：1月1日至3日放假三天</p>
+            <p><span>2月节日</span>2月2日至8日放假7天。</p>
+            <p><span>3月节日</span>妇女节：3月8日妇女节，与我无关。</p>
+            <p><span>4月节日</span>清明节：4月3日至5日放假3天</p>
+            <p><span>5月节日</span>劳动节：4月30日至5月2日放假3天。</p>
+            <p class="pCurrent"><span>6月节日</span>端午节：6月4日至6日放假3天。</p>
+            <p><span>7月节日</span>小暑：7月7日小暑。不放假。</p>
+            <p><span>8月节日</span>七夕节：8月6日七夕节。不放假。</p>
+            <p><span>9月节日</span>中秋节：9月10日至12日放假3天。</p>
+            <p><span>10月节日</span>国庆节：10月1日至7日放假7天。</p>
+            <p><span>11月节日</span>立冬：11月8日立冬。不放假</p>
+            <p><span>12月节日</span>艾滋病日:12月1日<br />废除奴隶制国际日:12月2日。</p>
+        </div>
+    </div>
+</body>
+
+</html>
+<script></script>

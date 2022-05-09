@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        input {
+            margin: 5px 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" placeholder="北京市" name="seeionns" />
+        <input type="text" placeholder="朝阳市" name="seeionns" />
+        <input type="button" value="传参" onclick="changeClick()">
+    </div>
+    <script>
+        function changeClick() {
+            var seeion = document.getElementsByName('seeionns')
+            for (var i = 0; i < seeion.length; i++) {
+                alert(seeion[i].value)
+            }
+        }
+
+    </script>
+</body>
+
+</html>

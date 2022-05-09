@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #outer {
+            background-color: hotpink;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <button onclick="changeColor()">变色</button>
+    </center>
+    <div id="outer">
+        <div>132</div>
+    </div>
+    <script>
+        window.onload = function () {
+            var outerDiv = document.getElementById('outer').getElementsByTagName('div')
+            var btn = document.getElementsByTagName('button')[0]
+            btn.onclick = function () {
+                // console.log(111);
+                for (var i = 0; i < outerDiv.length; i++) {
+                    outerDiv[i].style.display = "none"
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

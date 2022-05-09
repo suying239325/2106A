@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body,
+        ul {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font: 12px;
+        }
+
+        #tab {
+            border-bottom: 0;
+            background: black;
+            color: white;
+        }
+
+        #tab li {
+            width: 100px;
+            float: left;
+            list-style-type: none;
+            line-height: 30px;
+            text-align: center;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+
+        #tab li.current {
+            background-color: white;
+            color: black;
+        }
+
+        #div1 ul {
+            padding: 10px 0 0 30px;
+            display: none;
+            line-height: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="tab">
+        <li class="current">第一节课</li>
+        <li>第二节课</li>
+        <li>第三节课</li>
+    </ul>
+    <div id="div1">
+        <ul style="display: block;">
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+        </ul>
+        <ul>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+        </ul>
+        <ul>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+            <li>愿未来所有的好时光，都有你相伴，不再孤单！！</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var li = document.getElementById('tab').getElementsByTagName('li')
+        var ul = document.getElementById('div1').getElementsByTagName('ul')
+        for (var i = 0; i < li.length; i++) {
+            li[i].index = i
+            li[i].onmouseover = function () {
+                for (var n = 0; n < li.length; n++) li[n].className = ""
+                this.className = "current"
+                for (var n = 0; n < ul.length; n++) {
+                    ul[this.index].style.display = "block"
+                }
+            }
+        }
+    }
+</script>

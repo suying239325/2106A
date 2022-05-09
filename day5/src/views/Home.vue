@@ -71,6 +71,7 @@ export default {
     };
   },
   methods: {
+    //   跳转
     add() {
       this.$refs.ruleForm.validate(async (valid) => {
         console.log(valid);
@@ -80,7 +81,6 @@ export default {
         this.$router.push("/hy");
       });
     },
-    // 表单的重置
     reset() {
       this.$refs.ruleForm.resetFields();
     },

@@ -204,9 +204,8 @@ export default {
       },
     };
   },
-
-  mounted() {},
   created() {
+    //商品分类
     this.getspfls();
   },
   computed: {
@@ -239,6 +238,7 @@ export default {
         return false;
       }
     },
+    // 商品分类
     getspfls() {
       getspfl().then((res) => {
         this.options = res;

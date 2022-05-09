@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import { Button } from 'element-ui'
-import {Form,FormItem,Input} from 'element-ui'
-import {Container,Header,Aside,Main} from 'element-ui'
-import {Timeline,Upload,Checkbox,CheckboxGroup,Cascader,TabPane,Tabs,Step,Steps,Alert,MessageBox,Message,Popconfirm,Tree,Tag,Option,Select,Dialog,Switch,Pagination,TableColumn,Table,Card,BreadcrumbItem,Breadcrumb,Row,Col,Menu,Submenu,MenuItemGroup,MenuItem} from 'element-ui'
-Vue.use(Button) 
+import { Form, FormItem, Input } from 'element-ui'
+import { Container, Header, Aside, Main } from 'element-ui'
+import { Timeline, Upload, Checkbox, CheckboxGroup, Cascader, TabPane, Tabs, Step, Steps, Alert, MessageBox, Message, Popconfirm, Tree, Tag, Option, Select, Dialog, Switch, Pagination, TableColumn, Table, Card, BreadcrumbItem, Breadcrumb, Row, Col, Menu, Submenu, MenuItemGroup, MenuItem, timeline, TimelineItem } from 'element-ui'
+Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
@@ -40,13 +40,7 @@ Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Upload)
 Vue.use(Timeline)
-
-
-
-
-
-
-
+Vue.use(TimelineItem)
 
 
 Vue.prototype.$message = Message;

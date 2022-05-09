@@ -1,65 +1,58 @@
 <template>
-  <div class="rights">
-    <el-card class="box-card">
-      <el-table :data="tableData" border style="width: 100%">
-        <el-table-column label="#" width="40" type="index"> </el-table-column>
-        <el-table-column prop="authName" label="权限名称" width="180">
-        </el-table-column>
-        <el-table-column prop="path" label="路径"> </el-table-column>
-        <el-table-column prop="level" label="权限等级">
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.level | tagType">{{
-              scope.row.level | aa
-            }}</el-tag>
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-card>
-  </div>
+	<div class="">
+		<el-breadcrumb separator="/">
+			<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+			<el-breadcrumb-item>权限管理</el-breadcrumb-item>
+			<el-breadcrumb-item>权限列表</el-breadcrumb-item>
+		</el-breadcrumb>
+		<el-card class="mtop16">
+			<el-table :data="tableData" border>
+				<el-table-column align="center" type="index" label="#" width="80">
+				</el-table-column>
+				<el-table-column prop="authName" label="权限名称" height="80">
+				</el-table-column>
+				<el-table-column prop="path" label="路径" height="80">
+				</el-table-column>
+				<el-table-column prop="level" label="权限等级" height="80">
+					<template slot-scope="scope">
+						<div>
+							<el-tag :type="tagarr[scope.row.level]">
+								{{ scope.row.level | filter }}
+								<!-- 过滤初始数据0为一级,二级,三级 -->
+							</el-tag>
+						</div>
+					</template>
+				</el-table-column>
+			</el-table>
+		</el-card>
+	</div>
 </template>
 
 <script>
-import { quanxainList } from "@/http/api";
-export default {
-  data() {
-    return {
-      tableData: [],
-    };
-  },
-  created() {
-    this.getList();
-  },
-  methods: {
-    //   权限列表总数据
-    getList() {
-      quanxainList().then((res) => {
-        // console.log(res);
-        this.tableData = res;
-      });
-    },
-  },
-  //   过滤格式化权限等级
-  filters: {
-    tagType(ele) {
-      if (ele == 0) {
-        return "";
-      } else if (ele == 1) {
-        return "success";
-      } else if (ele == 2) {
-        return "warning";
-      }
-    },
-    aa(ele) {
-      if (ele == 0) {
-        return "一级";
-      } else if (ele == 1) {
-        return "二级";
-      } else if (ele == 2) {
-        return "三级";
-      }
-    },
-  },
-};
+	import {
+		getqxlist
+	} from "@/http/api";
+	export default {
+		data() {
+			return {
+				tableData: [],
+				tagarr: ["primary", "success", "warning"]
+			};
+		},
+		mounted() {},
+		created() {
+			this.getlist();
+		},
+		methods: {
+			getlist() {
+				getqxlist().then((res) => {
+					this.tableData = res;
+				});
+			},
+		},
+		components: {},
+	};
 </script>
 
-<style lang="scss"></style>
+<style lang='scss' scoped>
+</style>

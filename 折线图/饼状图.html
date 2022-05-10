@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./echarts.js"></script>
+    <style>
+        #echart {
+            width: 600px;
+            height: 500px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="echart"></div>
+    <script>
+        var echart = document.getElementById('echart')
+        var echartDom = echarts.init(echart)
+        option = {
+            legend: {
+                top: 'bottom'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            series: [
+                {
+                    name: 'Nightingale Chart',
+                    type: 'pie',
+                    radius: [50, 250],
+                    center: ['50%', '50%'],
+                    roseType: 'area',
+                    itemStyle: {
+                        borderRadius: 8
+                    },
+                    data: [
+                        { value: 40, name: '苏' },
+                        { value: 38, name: '张' },
+                        { value: 32, name: '李' },
+                        { value: 30, name: '马' },
+                        { value: 28, name: '王' },
+                        { value: 26, name: '萧' },
+                        { value: 22, name: '许' },
+                        { value: 18, name: '宋' }
+                    ]
+                }
+            ]
+        };
+        echartDom.setOption(option)
+    </script>
+</body>
+
+</html>

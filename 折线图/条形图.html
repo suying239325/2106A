@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./echarts.js"></script>
+    <style>
+        #box {
+            width: 600px;
+            height: 600px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        const box = document.getElementById('box')
+        const boxDom = echarts.init(box)
+        const op = {
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    type: 'line',
+                    areaStyle: {}
+                }
+            ]
+        }
+        boxDom.setOption(op)
+    </script>
+</body>
+
+</html>

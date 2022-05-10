@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 800px;
+            height: 600px;
+            background-color: rgba(0, 0, 0, 0.102);
+        }
+    </style>
+    <script src="./echarts.js"></script>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        var box = document.getElementById('box')
+        var dom = echarts.init(box)
+        const data = [];
+        for (let i = 0; i <= 360; i++) {
+            let t = (i / 180) * Math.PI;
+            let r = Math.sin(2 * t) * Math.cos(2 * t);
+            data.push([r, i]);
+        }
+        option = {
+            title: {
+                text: 'Two Value-Axes in Polar'
+            },
+            legend: {
+                data: ['line']
+            },
+            polar: {
+                center: ['50%', '54%']
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            angleAxis: {
+                type: 'value',
+                startAngle: 0
+            },
+            radiusAxis: {
+                min: 0
+            },
+            series: [
+                {
+                    coordinateSystem: 'polar',
+                    name: 'line',
+                    type: 'line',
+                    showSymbol: false,
+                    data: data
+                }
+            ],
+            animationDuration: 2000
+        };
+        dom.setOption(option)
+    </script>
+</body>
+
+</html>

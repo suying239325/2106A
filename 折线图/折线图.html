@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./echarts.js"></script>
+
+<body>
+    <style>
+        #mychart {
+            width: 800px;
+            height: 400px;
+            border: 1px solid #f00;
+            margin: 20px auto;
+        }
+    </style>
+
+    <div id="mychart"></div>
+    <script>
+        //1.获取mychart
+        const mychart = document.querySelector('#mychart')
+
+        //2.初始化echarts
+        const chart = echarts.init(mychart)
+
+        //3.配置图表数据
+        const option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [120, 200, 150, 80, 70, 110, 130],
+                type: 'bar'
+            }]
+        };
+
+        //4.渲染生成图表
+        chart.setOption(option)
+    </script>
+</body>
+
+</html>

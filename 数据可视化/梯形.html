@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #vas {
+            border: 1px solid red;
+        }
+
+        #box {
+            border-bottom: 30px solid red;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            height: 0;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="vas" width="800" height="600"></canvas>
+    <div id="box"></div>
+    <script>
+        var vasDom = document.getElementById('vas');
+        const context = vasDom.getContext('2d');
+
+        context.beginPath();
+        context.moveTo(200, 100);
+        context.lineTo(100, 300);
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(100, 300);
+        context.lineTo(400, 300);
+        context.stroke();
+
+
+        context.beginPath();
+        context.moveTo(200, 100);
+        context.lineTo(400, 300);
+        context.stroke();
+
+
+    </script>
+</body>
+
+</html>

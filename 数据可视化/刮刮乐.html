@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .txt {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 500px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="150"></canvas>
+    <p class="txt">恭喜你中了500万！！！！</p>
+</body>
+<script>
+    //获取canvas元素
+    const cvsDom = document.querySelector('#cvs')
+
+    //生成canvas绘制元素
+    const context = cvsDom.getContext('2d')
+
+    //绘制一个矩形填充颜色
+    context.fillStyle = '#ccc';
+    context.fillRect(0, 0, cvsDom.width, cvsDom.height);
+
+    context.fillStyle = '#fff';
+    context.font = '20px sans-serif';
+    context.textAlign = 'center';
+
+
+    context.fillText('刮刮有惊喜哦!', cvsDom.width / 2, cvsDom.height / 2);
+    context.fill();
+
+
+
+
+    //是否按下，未按下 false,按下是true
+    let isDraw = false
+    //绑定鼠标按下事件
+    cvsDom.addEventListener('mousedown', function () {
+        console.log('mousedown')
+        isDraw = true
+    }, false)
+
+    //绑定鼠标移动事件
+    cvsDom.addEventListener('mousemove', function (e) {
+
+        if (isDraw) {
+
+            //获取到要擦除的’橡皮‘坐标
+            let x = e.clientX - cvsDom.offsetLeft
+            let y = e.clientY - cvsDom.offsetTop
+            context.beginPath();
+
+            //图像合成的模式
+            context.globalCompositeOperation = 'destination-out';
+
+            //再把获取到的’橡皮‘坐标赋值给‘橡皮’，这时的橡皮可以用圆来充当
+            context.arc(x, y, 10, Math.PI / 180 * 0, Math.PI / 180 * 360, false);
+            context.fill();
+
+        }
+    }, false)
+
+    //绑定鼠标抬起事件
+    cvsDom.addEventListener('mouseup', function () {
+
+        isDraw = false
+
+    }, false)
+</script>
+
+</html>

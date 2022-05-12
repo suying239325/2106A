@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #magnifying-glass {
+            font-size: 10em;
+            /* This controls the size. */
+            display: inline-block;
+            width: 0.4em;
+            height: 0.4em;
+            border: 0.1em solid red;
+            position: relative;
+            border-radius: 0.35em;
+        }
+
+        #magnifying-glass::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            right: -0.25em;
+            bottom: -0.1em;
+            border-width: 0;
+            background: red;
+            width: 0.35em;
+            height: 0.08em;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="magnifying-glass"></div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cvs {
+            border: 1px solid #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="600" height="400"></canvas>
+</body>
+<script>
+    //获取canvas元素
+    const cvsDom = document.querySelector('#cvs')
+
+    //生成canvas绘制元素
+    const context = cvsDom.getContext('2d')
+
+    //绘制圆
+    context.beginPath();
+
+    context.arc(100, 100, 50, Math.PI / 180 * 0, Math.PI / 180 * 180, true);
+    context.stroke();
+
+
+    context.beginPath();
+    context.moveTo(400, 500);
+    context.lineTo(200, 400);
+    context.stroke();
+
+
+    context.beginPath();
+    context.moveTo(50, 100);
+    context.lineTo(101, 200);
+    context.stroke();
+
+    context.beginPath();
+    context.moveTo(150, 100);
+    context.lineTo(95, 220);
+    context.stroke();
+
+</script>
+
+</html>
